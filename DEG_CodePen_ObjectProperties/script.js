@@ -12,46 +12,54 @@ const bands = {
 	RussianCircles: 8
 };
 
-// let html = ''; <<< I don't understand what this is used for
+//let html = ''; //<<<<< how do I get key/value pairs into here?
 
 /* Your code to construct the HTML string goes here */
-const iterator = (obj) => {
-	for(let key in obj){
-		let keyItem = document.createElement('li'); 
-		let valueItem = obj[key]; // <<< why does this get me the value of the key/value pair?
+const displayBandsThatRock = (obj) => {
+	for(const key in obj){
+		const keyItem = document.createElement('li');
+		const valueItem = obj[key]; 
+
 
 		keyItem.innerText = key + ":" + " " + valueItem; 
-
-		//document.querySelector('ul').innerHTML = html; <<< I don't understand what this is used for
-		
-		let list = document.querySelector('ul');
+		//document.querySelector('ul').innerHTML = html;
+			
+		const list = document.querySelector('ul');
 		list.appendChild(keyItem);
+		
 	}
 
 	
 } 
-iterator(bands);
 
+
+const chk_box = document.getElementById('rockBox');
+chk_box.addEventListener('change', function(e){
+
+		const list = document.querySelector('ul');
+		
+		if(list){
+			
+			if(chk_box.checked){
+				displayBandsThatRock(bands);
+			}else{
+				reset(e);
+			}
+		}
+
+	});
+
+function reset(){
+	
+	document.querySelector('ul').innerHTML = " ";
+ 
+}
 
 /*
-1. Is is better to use parameters when writing functions or to pass the object?
-2. Is this code supposed to replace the hard coded "Good Charlotte 0" line?
-
-const iterator = (bands) => {
-	for(let key in bands){
-		let keyItem = document.createElement('li'); 
-		let valueItem = bands[key]; 
-
-		keyItem.innerText = key + ":" + " " + valueItem; 
-
-		//document.querySelector('ul').innerHTML = html; <<< I don't understand what this is used for
-		
-		let list = document.querySelector('ul');
-		list.appendChild(keyItem);
-	}
-
-	
-} 
-iterator(bands);
+ 1. The reset function takes away the first band in the list (hard coded Good Charlotte).
+    How can I keep this band when I use the reset function? I want it to make sense when the checkbox says "more bands that rock".
+ 2. How do I use the line 'let html = ''; and document.querySelector('ul').innerHTML = html;
+ 3. Is insertAdjacentHTML a more modern way to put html on the page than document.CreateElement / appendChild?
 */
+
 
